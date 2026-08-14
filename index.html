@@ -454,18 +454,51 @@ a:hover{color:#a9c7ff}
 }
 .paid-badge::before{background:#4d8dff!important;box-shadow:0 0 10px #4d8dff}
 
+/* ── Starfield fix ── */
+#starfield{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.cursor-glow{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(77,141,255,.10), transparent 68%);
+  mix-blend-mode: screen;
+  transition: opacity .25s;
+}
+
+/* Keep content above the stars */
+nav,
+.hero,
+.section,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #starfield { display: none; }
+  .cursor-glow { display: none; }
+}
 </style>
 </head>
 <body>
 
 <canvas id="starfield" aria-hidden="true"></canvas>
 <div class="cursor-glow" aria-hidden="true"></div>
-<style>
-#starfield{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-.cursor-glow{position:fixed;left:0;top:0;width:220px;height:220px;border-radius:50%;pointer-events:none;z-index:0;opacity:0;transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(77,141,255,.10),transparent 68%);mix-blend-mode:screen;transition:opacity .25s}
-@media (prefers-reduced-motion:reduce){#starfield{display:none}.cursor-glow{display:none}}
-</style>
+
 <script>
 (()=>{
  const c=document.getElementById('starfield'), ctx=c.getContext('2d'), glow=document.querySelector('.cursor-glow');
@@ -772,4 +805,3 @@ MetaQuestGuard.Instance.<span class="cm2">SetStudioSession</span>(session);<br><
 
 </body>
 </html>
-
