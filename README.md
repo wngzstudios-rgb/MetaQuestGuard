@@ -1,18 +1,19 @@
 # MetaQuestGuard
 
-**Paid anti-cheat for Meta Quest VR games — currently in active development.**
+**Paid anti-cheat for Meta Quest & Android VR — commercial license.**
 
-Standalone C# package built on Meta Attestation, identity, and entitlement — not PC kernel drivers or third-party cloud scanners. Designed especially for competitive and Gorilla Tag–style locomotion titles.
+Standalone Unity package for Quest and Android VR. Runtime integrity scans, FridaShield instrumentation detection, native-library baselines, GorillaLocomotion-aware server validation, and multiplayer helpers for Mirror, Photon, and PlayFab.
 
-[![Status](https://img.shields.io/badge/Status-In%20Development-orange?style=flat-square)](#status)
-[![Quest](https://img.shields.io/badge/Platform-Meta%20Quest%202%2FPro%2F3%2F3S-00A4E4?style=flat-square)](https://developers.meta.com/horizon/)
+**Meta Platform Attestation is not required or included.** This edition uses your own authentication / session model (or anonymous scanning) instead.
+
+[![Status](https://img.shields.io/badge/Status-Paid%20Commercial-blue?style=flat-square)](#license--access)
+[![Quest](https://img.shields.io/badge/Platform-Meta%20Quest%20%2F%20Android%20VR-00A4E4?style=flat-square)](https://developers.meta.com/horizon/)
 [![Unity](https://img.shields.io/badge/Engine-Unity%20(IL2CPP)-000000?style=flat-square&logo=unity)](https://unity.com/)
-[![Photon](https://img.shields.io/badge/Netcode-Photon%20%7C%20Mirror%20%7C%20Agnostic-7B68EE?style=flat-square)](https://www.photonengine.com/)
+[![Netcode](https://img.shields.io/badge/Netcode-Mirror%20%7C%20Photon%20%7C%20PlayFab-7B68EE?style=flat-square)](#whats-included)
 [![License](https://img.shields.io/badge/License-Commercial%20(Paid)-red?style=flat-square)](#license--access)
 
-> **In development.** APIs, detection coverage, and packaging may change before a stable release.  
-> Paid / early-access builds are planned as an **obfuscated DLL** (ConfuserEx / Obfuscar / commercial IL obfuscator + string encryption). Source access will be available to licensed studios.  
-> Product docs site: `MetaQuestGuard.html` in this repo.
+> **Paid product.** Licensing and purchase access are handled through your sales / download flow.  
+> Product docs site: `MetaQuestGuard.html` in this repo (or the hosted docs page).
 
 ---
 
@@ -22,32 +23,31 @@ Competitive Quest titles (especially Gorilla Tag–style locomotion) face:
 
 - Client-side authority abuse (speed, fly, stretch, memory edits)
 - Mod loaders & injectors (MelonLoader, BepInEx, Harmony, Frida, QuestPatcher)
-- Identity / economy abuse and ban evasion
 - False positives from naive “max speed” checks on legitimate momentum flings
+- RPC / spawn floods and Master Client abuse on Photon
 
-Meta’s own guidance is a **layered model**: entitlement → Attestation → server-side validation. Photon (and most netcode) is **not** inherently authoritative. MetaQuestGuard implements that model as a **standalone C# package** that talks only to *your* backend.
+MetaQuestGuard raises the cost of client-side cheating and moves important gameplay decisions to an authoritative server — without depending on Meta Platform Attestation.
 
 | Problem | Guard’s answer |
 |--------|----------------|
-| Pirated / repackaged APK | Entitlement + Meta Attestation (server-verified) |
-| Spoofed identity | Meta User Verification → org-scoped ID → backend play token |
-| Speed / fly / stretch hacks | Server-side kinematics + GorillaLocomotion-aware validator |
-| Mod loaders & injection | Reflection + `/proc/self/maps` + Harmony type-graph scans |
+| Mod loaders & injection | Runtime integrity scans + FridaShield multi-vector checks |
+| Native library tampering | Encrypted Android native-library baseline (Editor-generated) |
+| Speed / fly / stretch / long-arm | Server-side kinematics + GorillaLocomotion-aware validator |
+| Rubber-band teleports & sustained flight | Sequence, release/decay, airborne, and geometry checks |
 | RPC / spawn floods | Opt-in Photon `AntiSpamRpc` |
 | Master Client seizure | Opt-in Photon `AntiMasterClientSwitch` |
-| False positives on flings | Per-type thresholds, suppression windows, history re-validation |
+| False positives on flings | Per-signal confidence thresholds + suppression windows |
 
 ---
 
 ## Design pillars
 
-- **Quest-native trust root** — Meta Attestation, not PC anti-cheat. Zero PC-only detections in the Quest build (they would be incompatible with Attestation and the platform model).
-- **Attestation tokens are cached** for their full validity window. **No heartbeat that mints new tokens** (Meta rate-limits Attestation; a heartbeat would waste budget for no security gain).
-- **Advanced** device integrity always passes gated actions. **Basic** is restricted unless you opt in. Nothing below Basic.
-- **Security patch age** (default 30 days) is gated the same way a failed attestation is.
-- **Read-only, user-mode, worker-thread only** — never patches processes, never blocks the main thread, never tips off the player by default.
-- **Silent reporting** — signed reports go to *your* server. Guard itself does not kick (Photon helpers that do are opt-in).
-- **Netcode-agnostic core** — Mirror bridge and Photon helpers are included in the current tree; Fusion and other transports are planned on the same pattern.
+- **No Meta Attestation dependency** — works with your existing auth/session stack or anonymous scanning.
+- **Read-only, user-mode, worker-thread** — never patches processes, never blocks the main thread, never tips off the player by default.
+- **Silent reporting** — detections are reported (optionally HMAC-signed) to *your* backend. Guard itself does not kick; Photon helpers that do are opt-in.
+- **Server authority first** — client signals are supporting evidence; competitive outcomes live on the server.
+- **Netcode-friendly** — Mirror bridge and Photon helpers included; PlayFab CloudScript path for high-confidence enforcement.
+- **Configurable thresholds** — per-detection confidence values and anti-false-positive windows.
 
 ---
 
@@ -56,86 +56,83 @@ Meta’s own guidance is a **layered model**: entitlement → Attestation → se
 ```
 MetaQuestGuard/
 ├── MetaQuestGuard.html          # Product / docs site
-└── Scripts/
-    ├── MetaQuestGuard.cs                 # Core Guard + bootstrap + generic VR validator
-    ├── MetaQuestGuardGorillaLocomotion.cs # Gorilla Tag–style locomotion validator (v2)
-    ├── MetaQuestGuardMirrorIntegration.cs # Mirror server bridge
-    ├── AntiSpamRpc.cs                    # Photon: rate-limit RPC + Instantiation
-    └── AntiMasterClientSwitch.cs         # Photon: block illicit Master Client switches
+└── Scripts/                     # (package contents under license)
+    ├── Core Guard + bootstrap + generic VR validator
+    ├── GorillaLocomotion-aware movement validator
+    ├── Mirror server bridge
+    ├── AntiSpamRpc              # Photon: rate-limit RPC + Instantiation
+    └── AntiMasterClientSwitch   # Photon: block illicit Master Client switches
 ```
 
 ### Core capabilities
 
 | Area | Features |
 |------|----------|
-| **Session** | Bootstrap via entitlement + user proof + attestation → short-lived play token + HMAC key |
-| **Gates** | `IsAllowedHighValueAction()` for ranked / trades / progression |
-| **Self-protection** | Guard method-body integrity hash vs baseline in token; signed worker “alive” pings |
-| **Runtime scans** | Mod loaders, Harmony graphs, injected libs, unusual `libunity`/`libil2cpp` maps, dynamic codegen, debuggers, emulator signals *(expanding)* |
-| **Generic VR kinematics** | Sequence, rate, clock skew, speed envelopes, reach, rubber-band, joint limits, short history + prediction |
-| **GorillaLocomotion v2** | Surface contact, release/decay, mid-air accel, air time + height gain, rubber-band, statistical outliers, history buffer, physics prediction, long-arm / joint checks |
-| **Anti-false-positive** | Per-detection confidence thresholds, post-action suppression windows, history for server re-validation, coalesced “detection storm” reports |
-| **Reporting** | Versioned schema (v2), HMAC-signed, ring buffer, POST to your endpoint only |
+| **Session** | Anonymous scanning *or* `StudioSession` (SessionId, optional HMAC key, player UniqueId, expiry, build version, integrity baseline) |
+| **Runtime integrity** | Mod loaders, library injection, instruction patching, FridaShield, native-library baseline, Guard self-integrity, debuggers, virtualized device, multi-instance, dynamic code generation |
+| **FridaShield** | Native multi-vector checks: ports, memory maps, threads, RWX regions, Unix sockets, ELF hashes, TracerPid, memory tracing signals |
+| **Generic VR validation** | Sequence monotonicity, head/hand speed, clock skew, command rate, rubber-band, joint/reach limits |
+| **GorillaLocomotion** | Arm span, grip/release speed, momentum decay, sustained flight, grab geometry, rubber-band teleports, long-arm behaviour |
+| **PlayFab** | Optional CloudScript path for high-confidence detections → Discord + configurable bans |
+| **Photon helpers** | AntiSpamRpc, AntiMasterClientSwitch |
+| **Mirror bridge** | Forwards validated locomotion frames; exposes detections to moderation hooks |
+| **Reporting** | Optional HMAC signing; silent detection designed for server enforcement rather than automatic client quit |
+
+---
+
+## Package compatibility
+
+| Target | Status |
+|--------|--------|
+| Meta Quest / Android VR | ✓ Primary target |
+| Mirror Networking | ✓ Bridge included |
+| Photon PUN | ✓ Helpers included |
+| PlayFab | ✓ CloudScript support |
+
+This edition does **not** include or require Meta Platform Attestation. You can run anonymously, or supply a `StudioSession` with your own session ID, optional HMAC key, player identifier, expiry, build version, and integrity baseline.
 
 ---
 
 ## Quick start
 
-### 1. Bootstrap (once at launch)
+No Meta Attestation bootstrap is required.
 
-After Meta Platform SDK init (entitlement within ~10s, user verification, attestation with server nonce):
+### 1. Add MetaQuestGuard
 
-```csharp
-StartCoroutine(MetaQuestGuardBootstrap.Run(
-    guard: MetaQuestGuard.Instance,
-    backendUrl: "https://your-server.example.com/anticheat/bootstrap",
-    metaUserId: metaUserId,
-    userProofNonce: userProofNonce,
-    attestationToken: attestationToken,
-    onComplete: (ok, playToken) =>
-    {
-        if (!ok) { /* fail closed for ranked */ return; }
-        // Session is cached in Guard — no refresh heartbeat
-    }));
-```
+Place `MetaQuestGuard` in your scene. With `allowHighValueWithoutSession` enabled, runtime scanning starts automatically.
 
-Your backend should verify nonce, package, cert hash, app/device integrity, map to an org-scoped ID, and return a short-lived play token + HMAC key (+ optional Guard integrity baseline).
-
-### 2. Gate high-value actions
+### 2. Connect your session (optional)
 
 ```csharp
-if (!MetaQuestGuard.Instance.IsAllowedHighValueAction(out string reason))
-{
-    // reason: no_valid_session | security_patch_outdated | device_integrity_insufficient
-    return;
-}
-// join ranked queue / claim reward / trade ...
+// No Meta Attestation required
+var session = new MetaQuestGuard.StudioSession {
+    SessionId = myMatchToken,
+    UniqueId = myPlayerId,
+    HmacKey = myOptionalHmacKey,           // optional — enables signed reports
+    TokenExpiresAtUtc = DateTime.UtcNow.AddHours(4)
+};
+
+MetaQuestGuard.Instance.SetStudioSession(session);
+
+// Or simply allow anonymous scanning and keep enforcement server-side.
 ```
 
-### 3. Server-side movement validation
+Alternatively, use the PlayFab CloudScript backend for high-value detections.
+
+### 3. Validate gameplay on the server
 
 **Gorilla-style locomotion** (authoritative server):
 
 ```csharp
-var loco = new GorillaLocomotionGuard();
-loco.NearestClimbableSurfaceDistance = pos => /* distance to climbable */;
-
-var result = loco.ValidateFrame(playerId, sample);
+var result = GorillaLocomotionGuard.ValidateFrame(playerId, sample);
 if (!result.IsAccepted)
 {
-    MetaQuestGuard.Instance.ReportDetection(
-        confidence: 0.8f,
-        type: $"gorilla_locomotion_{result.Reason}",
-        evidence: result.Detail,
-        historyJson: loco.GetHistoryJson(playerId));
+    // Forward detection via OnDetected / your moderation pipeline
     return; // do not apply state
 }
-
-// Optional: reduce false positives after a legit fling
-MetaQuestGuard.Instance.NotifyHighIntensityAction();
 ```
 
-**Generic VR envelope** (non-Gorilla games):
+**Generic VR input:**
 
 ```csharp
 var result = MetaQuestGuard.Instance.ValidateInputCommand(cmd, gameState, nowMs);
@@ -156,73 +153,93 @@ Attach `AntiSpamRpc` and/or `AntiMasterClientSwitch` on a persistent object. The
 
 ---
 
+## Runtime detection overview
+
+A worker thread performs configurable read-only sweeps. Reports expose confidence, type, evidence, session/build identifiers, and optional history.
+
+| Detection | What the package checks | Default threshold |
+|-----------|-------------------------|-------------------|
+| Mod loaders | MelonLoader, BepInEx, Harmony, Il2CppInterop, QuestPatcher and related signatures | 0.90 |
+| Library injection | Injection / instrumentation artifacts and loaded-library signals | 0.90 |
+| Instruction patching | Critical native function pointers / inline-hook indicators | 0.95 |
+| Frida instrumentation | FridaShield native multi-vector checks | 0.60 |
+| Native library tamper | Encrypted native-library baseline comparison (Android) | 0.92 |
+| Guard integrity | Self-integrity hash verification | 0.99 |
+| Debuggers | Debugger attachment signals | Configurable |
+| Virtualized device | Device / build soft integrity indicator | Configurable |
+| Multiple clients | Named single-instance mutex | Configurable |
+| Dynamic code generation | Suspicious dynamic-code behaviour | Configurable |
+
+**Important limitation:** Without Meta Attestation there is no platform-level proof that the binary is genuine or that the device is untampered. Client-side signals should be combined with authoritative server validation.
+
+---
+
+## Server validation overview
+
+| Validation | Implementation | Strength |
+|------------|----------------|----------|
+| Sequence monotonicity | Per-player command sequencing and replay detection | High |
+| Head / hand kinematics | Default max head ~20 m/s, hand ~25 m/s + time-delta checks | Medium |
+| Arm span & grip speed | Reach cap from the head; grip-speed limits while gripped | Medium |
+| Release & momentum | Caps release speed; validates expected post-release decay | High |
+| Sustained flight | Airborne movement without grip/ground contact beyond expected arc | High |
+| Grab geometry | Optional callback: new grip near valid climbable geometry | Medium |
+| Rubber-band teleport | Short-delta position spike detection | High |
+| Long-arm exploit | Reach / joint configuration checks for abnormal extension | High |
+| Rate limiting | Commands-per-second cap and flood detection | Medium |
+| Clock synchronization | Client timestamp sanity with configurable skew tolerance | Low |
+
+---
+
+## Deployment model
+
+| Setup | How it works | Best fit |
+|-------|--------------|----------|
+| **Anonymous** | Guard starts scanning automatically; reports can be unsigned | Projects that already identify players elsewhere |
+| **StudioSession** | Supply SessionId, optional HMAC key, UniqueId, expiry, build version, baseline | Games with their own authentication / session service |
+| **PlayFab** | CloudScript receives high-value detections and can ban | PlayFab-backed multiplayer titles |
+| **Photon** | Anti-spam and Master Client protection helpers | Photon PUN multiplayer |
+| **Mirror** | Bridge submits movement frames for server validation | Mirror networking projects |
+
+---
+
 ## Architecture (recommended)
 
 ```
-Quest client
-  ├─ Meta entitlement (≤10s of launch)
-  ├─ GetUserProof → your backend → user_nonce_validate → org_scoped_id
-  ├─ Attestation (server nonce) → your backend verifies token claims
-  └─ MetaQuestGuard (cached session, worker scans, silent reports)
-         │
-         ▼
+Quest / Android VR client
+  └─ MetaQuestGuard
+         ├─ Runtime integrity scans (worker thread, read-only)
+         ├─ Optional StudioSession (or anonymous)
+         └─ Silent detection reports (optionally HMAC-signed)
+                │
+                ▼
 Your backend
-  ├─ Play token + HMAC + optional Guard integrity baseline
-  ├─ Photon Custom Auth / webhooks (trusted session facts)
-  └─ Authoritative game server
-         ├─ GorillaLocomotionGuard / ValidateInputCommand
-         ├─ Scoring, inventory, cooldowns, progression
-         └─ Signed detection reports → moderation / bans
+  ├─ Session / auth / play token (your model)
+  ├─ Authoritative game server
+  │     ├─ GorillaLocomotionGuard / ValidateInputCommand
+  │     ├─ Scoring, inventory, cooldowns, progression
+  │     └─ Detection reports → moderation / bans
+  └─ Optional: PlayFab CloudScript, Photon Custom Auth / webhooks
 ```
 
 Treat **every** client pose, RPC, and custom property as untrusted unless your server can re-derive or validate it. Photon room membership ≠ gameplay authority.
 
 ---
 
-## Detection overview
-
-**Runtime (client worker, read-only)**  
-Mod loaders · Harmony type graphs · library injection · unusual native maps · dynamic codegen · instruction prologue hashes · Guard integrity · worker alive · debuggers · emulator signals · multi-instance mutex  
-
-**Server (authoritative)**  
-Session / sequence / rate / clock · head/hand speed · reach · rubber-band · joint limits · Gorilla surface contact · release & drag decay · mid-air accel · air time & height gain · statistical outliers · history spikes · physics prediction  
-
-**Photon (opt-in)**  
-RPC spam · Instantiation spam · unauthorized Master Client switch  
-
-Confidence thresholds and short suppression windows after legitimate high-intensity actions keep false positives down without weakening real cheats.
-
----
-
 ## Privacy & platform notes
 
-- Reports go **only** to the URL you configure. No third-party anti-cheat cloud.
-- Prefer **less invasive on-device, stronger on server** — aligned with Meta Data Use Checkup, privacy policy, and Attestation guidance (proportional enforcement, device ban with your own moderation pipeline).
-- VR motion can be identifying; design telemetry as if it may be regulated biometric-adjacent data under GDPR/CCPA when used for linkage.
-- Meta Attestation is Android Quest–native (Quest 2 / Pro / 3 / 3S). Do not rely on Google Play Integrity as the primary Quest trust signal.
+- Reports go **only** to the URL / backend you configure. No third-party anti-cheat cloud.
+- Prefer less invasive on-device checks and stronger server authority.
+- VR motion data can be identifying; design telemetry with GDPR/CCPA in mind when used for linkage.
+- This package does not provide platform-level device attestation.
 
 ---
 
 ## Requirements
 
 - Unity (IL2CPP recommended for Quest)
-- Meta Platform / Horizon SDK (entitlement, user verification, Attestation API)
-- Your own HTTPS backend for bootstrap + report ingestion
-- Optional: Photon PUN / Realtime (for the two helper scripts), Mirror (bridge included)
-
----
-
-## Status
-
-MetaQuestGuard is a **paid anti-cheat in active development**.
-
-| Phase | Meaning |
-|-------|---------|
-| **Now** | Core Guard, GorillaLocomotion validator, Mirror bridge, Photon helpers, and docs are being built and iterated |
-| **Next** | Hardening, early studio pilots, obfuscated package pipeline |
-| **Later** | Stable paid release, broader transport adapters, continued detection updates |
-
-Expect breaking changes to APIs and config until a versioned stable release is tagged. Feedback from Quest / Gorilla-style projects is welcome and directly shapes the roadmap.
+- Your own HTTPS backend (or PlayFab) for report ingestion and enforcement
+- Optional: Photon PUN / Realtime (helper scripts), Mirror (bridge included), PlayFab
 
 ---
 
@@ -230,23 +247,25 @@ Expect breaking changes to APIs and config until a versioned stable release is t
 
 **Commercial (paid) product — not open source.**
 
-- Development builds and early access are offered under a commercial license.
-- Release packages are intended to ship as an **obfuscated DLL**; source access under studio agreement.
+- This is a paid anti-cheat package. A commercial license is required.
 - Do not redistribute the package, scripts, or source without a valid license.
+- Pricing / purchase details should be added to your sales or license link (not specified in the package itself).
 
-For early access, licensing, or pilot interest, contact the author via the channels on the product page (`MetaQuestGuard.html`) or the GitHub profile linked to this repository.
+For licensing or access, use the channels on the product page (`MetaQuestGuard.html`) or the contact method linked to this repository.
 
 ---
 
 ## Disclaimer
 
-No anti-cheat is perfect. Determined attackers with full client control can still attempt bypasses. MetaQuestGuard aims to raise attacker cost, bind sessions to Meta-verified identity and device integrity, and move competitive outcomes to a server-authoritative boundary — the same layered approach Meta and Photon document.
+No anti-cheat is perfect. Determined attackers with full client control can still attempt bypasses. MetaQuestGuard aims to raise attacker cost, surface integrity signals, and move competitive outcomes to a server-authoritative boundary.
 
-Because the project is **in development**, treat current builds as pre-release: validate thoroughly in your own environment, keep server authority as the real trust boundary, and use proportional enforcement with a clear appeals path.
+Validate thoroughly in your own environment, keep server authority as the real trust boundary, and use proportional enforcement with a clear appeals path.
 
 ---
 
 <p align="center">
+  <strong>MetaQuestGuard</strong> · Paid commercial package · No Meta Attestation dependency · Quest / Android VR · GorillaLocomotion-aware
+</p>
   <strong>MetaQuestGuard</strong> · Paid · In development · Attestation-native · GorillaLocomotion-aware<br/>
   <sub>Quest 2 / Pro / 3 / 3S · Unity · Photon &amp; Mirror helpers · Your backend only</sub>
 </p>
