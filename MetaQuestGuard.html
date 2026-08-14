@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MetaQuestGuard — Meta Attestation Anti-Cheat for Quest VR</title>
+<title>MetaQuestGuard — Paid Anti-Cheat for Quest & Android VR</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -357,9 +357,151 @@
     .nav-links { gap: 16px; }
     .footer-inner { flex-direction: column; align-items: flex-start; }
   }
+
+/* ── Pro dark / blue theme ── */
+:root{
+  --ink:#f4f7fb; --ink-2:#aeb9c9; --ink-3:#718096; --ink-4:#4b5565;
+  --surface:#0f141c; --surface-2:#151c27; --white:#080b10;
+  --accent:#4d8dff; --accent-bg:rgba(77,141,255,.12); --accent-dk:#79a9ff;
+  --green:#55d68a; --green-bg:rgba(85,214,138,.11);
+  --amber:#f6c76b; --amber-bg:rgba(246,199,107,.11);
+  --red:#ff7d88; --red-bg:rgba(255,125,136,.11);
+  --border:rgba(255,255,255,.08); --border-2:rgba(255,255,255,.14);
+  --shadow:0 18px 60px rgba(0,0,0,.30);
+}
+html{background:#080b10}
+body{
+  background:
+    radial-gradient(circle at 50% -10%,rgba(49,102,190,.14),transparent 38%),
+    linear-gradient(180deg,#080b10 0%,#0b1017 100%);
+  color:var(--ink);
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(77,141,255,.05),transparent 25%),
+    radial-gradient(circle at 80% 60%,rgba(77,141,255,.04),transparent 28%);
+}
+nav{
+  background:rgba(8,11,16,.78);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 8px 30px rgba(0,0,0,.16);
+}
+.nav-logo,.footer-logo{color:var(--ink)}
+.nav-logo-icon{background:linear-gradient(135deg,#1b3157,#0d1624);box-shadow:0 0 24px rgba(77,141,255,.16)}
+.nav-links a{color:var(--ink-2)}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:#fff;color:#08101a!important}
+.nav-cta:hover{background:#dce9ff}
+.hero{
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(12,18,28,.62),rgba(8,11,16,.25));
+}
+.hero::before{
+  background:radial-gradient(ellipse at center,rgba(77,141,255,.15) 0%,transparent 70%);
+}
+.hero h1,.section-title{color:#f7faff}
+.hero-sub,.section-sub{color:var(--ink-2)}
+.hero h1 em{color:#70a4ff;text-shadow:0 0 28px rgba(77,141,255,.22)}
+.hero-badge{color:var(--green);background:var(--green-bg);border-color:rgba(85,214,138,.2)}
+.btn{
+  background:linear-gradient(135deg,#4d8dff,#376fd8);
+  box-shadow:0 10px 28px rgba(55,111,216,.22);
+}
+.btn:hover{background:linear-gradient(135deg,#70a4ff,#4d8dff);transform:translateY(-1px)}
+.compat-cell,.feature-card,.code-wrap,
+[style*="background:var(--surface)"],
+[style*="background:var(--white)"]{
+  background:linear-gradient(180deg,rgba(20,28,40,.88),rgba(12,17,25,.92)) !important;
+  border-color:var(--border) !important;
+  box-shadow:0 10px 34px rgba(0,0,0,.16);
+}
+.feature-card{transition:transform .25s,border-color .25s,box-shadow .25s}
+.feature-card:hover{border-color:rgba(77,141,255,.55)!important;transform:translateY(-3px);box-shadow:0 16px 45px rgba(0,0,0,.28),0 0 0 1px rgba(77,141,255,.08)}
+.feature-card h3,th,[style*="color:var(--ink)"]{color:#f4f7fb!important}
+.feature-card p,td,[style*="color:var(--ink-2)"]{color:#aeb9c9!important}
+.code-wrap{overflow:hidden}
+.code-bar{background:#0a0e14}
+.code-body{background:#0b1017;color:#dbe7f5}
+.cm{color:#66758a}.cm2{color:#70a4ff}.ck{color:#c29bff}.cv{color:#f6c76b}.cs{color:#67d8a0}
+th{background:#131b27;border-color:var(--border)}
+td{border-color:var(--border)}
+table{color:var(--ink)}
+.section + .section{border-top-color:var(--border)}
+footer{border-top-color:var(--border)}
+.footer-note{color:var(--ink-3)}
+.footer-links a{color:var(--ink-2)}
+footer .footer-links a:hover{color:#fff}
+section[style*="background:var(--ink)"]{
+  background:linear-gradient(135deg,#070a0f,#0c1522 60%,#0a0d13)!important;
+  position:relative;overflow:hidden;
+}
+section[style*="background:var(--ink)"]::before{
+  content:"";position:absolute;width:600px;height:600px;left:50%;top:-420px;transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(77,141,255,.18),transparent 68%);
+  pointer-events:none;
+}
+code{color:#a9c9ff}
+a{color:#78a9ff}
+a:hover{color:#a9c7ff}
+
+
+.paid-badge{
+  color:#a9c8ff!important;
+  background:rgba(77,141,255,.10)!important;
+  border-color:rgba(77,141,255,.28)!important;
+  box-shadow:0 0 24px rgba(77,141,255,.08);
+}
+.paid-badge::before{background:#4d8dff!important;box-shadow:0 0 10px #4d8dff}
+
 </style>
 </head>
 <body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="cursor-glow" aria-hidden="true"></div>
+<style>
+#starfield{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.cursor-glow{position:fixed;left:0;top:0;width:220px;height:220px;border-radius:50%;pointer-events:none;z-index:0;opacity:0;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(77,141,255,.10),transparent 68%);mix-blend-mode:screen;transition:opacity .25s}
+@media (prefers-reduced-motion:reduce){#starfield{display:none}.cursor-glow{display:none}}
+</style>
+<script>
+(()=>{
+ const c=document.getElementById('starfield'), ctx=c.getContext('2d'), glow=document.querySelector('.cursor-glow');
+ let w,h,dpr,stars=[],mx=-9999,my=-9999,last=0;
+ const count=()=>Math.min(180,Math.max(70,Math.floor(innerWidth*innerHeight/11000)));
+ function resize(){
+   dpr=Math.min(devicePixelRatio||1,2); w=innerWidth; h=innerHeight;
+   c.width=w*dpr;c.height=h*dpr;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);
+   stars=Array.from({length:count()},()=>({x:Math.random()*w,y:Math.random()*h,r:.45+Math.random()*1.5,a:.25+Math.random()*.6,
+     vx:(Math.random()-.5)*.025,vy:(Math.random()-.5)*.04,p:Math.random()*Math.PI*2}));
+ }
+ addEventListener('resize',resize);
+ addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;glow.style.opacity=.8;glow.style.left=mx+'px';glow.style.top=my+'px'});
+ addEventListener('pointerleave',()=>glow.style.opacity=0);
+ function draw(t){
+   const dt=Math.min(32,t-last||16);last=t;ctx.clearRect(0,0,w,h);
+   for(const s of stars){
+     s.x+=s.vx*dt;s.y+=s.vy*dt;s.p+=.018*dt;
+     if(s.x<-4)s.x=w+4;if(s.x>w+4)s.x=-4;if(s.y<-4)s.y=h+4;if(s.y>h+4)s.y=-4;
+     const dx=mx-s.x,dy=my-s.y,dist=Math.hypot(dx,dy),hover=Math.max(0,1-dist/115);
+     const alpha=s.a*(.62+.38*Math.sin(s.p)) + hover*.55;
+     const radius=s.r+hover*1.9;
+     if(hover>.02){
+       const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,12+hover*16);
+       g.addColorStop(0,'rgba(110,171,255,'+(hover*.5)+')');g.addColorStop(1,'rgba(77,141,255,0)');
+       ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,18+hover*14,0,Math.PI*2);ctx.fill();
+     }
+     ctx.fillStyle='rgba(190,215,255,'+Math.min(1,alpha)+')';
+     ctx.beginPath();ctx.arc(s.x,s.y,radius,0,Math.PI*2);ctx.fill();
+   }
+   requestAnimationFrame(draw);
+ }
+ resize();requestAnimationFrame(draw);
+})();
+</script>
+
 
 <!-- ── Nav ── -->
 <nav>
@@ -375,9 +517,9 @@
       </a>
       <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#quickstart">Quick start</a>
-        <a href="#download" class="nav-cta">Download</a>
+        <a href="#architecture">How it works</a>
+        <a href="#quickstart">Integration</a>
+        <a href="#download" class="nav-cta">License Guard</a>
       </div>
     </div>
   </div>
@@ -386,17 +528,20 @@
 <!-- ── Hero ── -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-badge">Source code cannot be accessed or modified</div>
-    <h1>Attestation-driven <em>anti-cheat</em> for Meta Quest VR.</h1>
+    <div class="hero-badge paid-badge">PAID ANTI-CHEAT · COMMERCIAL LICENSE</div>
+    <h1>Professional <em>anti-cheat</em> for Meta Quest &amp; Android VR.</h1>
     <p class="hero-sub">
-      Built after analyzing real world cheats. Detects Unity-specific tools like MelonLoader,
-      BepInEx, and other common threats — read-only, user-mode, on a worker thread, with zero
-      performance hit for honest players. Bakes directly into your IL2CPP assembly with no obvious
-      AntiCheat.dll. Ships as an obfuscated DLL (ConfuserEx / Obfuscar / commercial IL obfuscator + string encryption); source access available to serious studios on request. Includes Guard self-integrity checks, expanded GorillaLocomotion validation, anti-FP controls, and opt-in Photon AntiRPCSpam / AntiMasterClientSwitch.
+      A standalone, no-attestation Unity anti-cheat package built for Quest and Android VR.
+      Combines runtime integrity scans, FridaShield instrumentation detection, native library
+      baselines, GorillaLocomotion-aware server validation, and multiplayer helpers for Mirror,
+      Photon, and PlayFab. <strong>Meta Platform Attestation is not required or included.</strong>
     </p>
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-      <a href="#quickstart" class="btn">Quick start</a>
-      <a href="#architecture" class="btn" style="background: rgba(58,92,245,.1); color: var(--accent); border: 1px solid var(--accent-bg);">Read architecture</a>
+      <a href="#quickstart" class="btn">View integration</a>
+      <a href="#download" class="btn" style="background:rgba(77,141,255,.10);color:var(--accent);border:1px solid rgba(77,141,255,.25);">Get a license</a>
+      <div class="hero-status" style="margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);">
+        <span>● Paid product</span><span>● No Meta Attestation</span><span>● Quest / Android VR</span>
+      </div>
     </div>
   </div>
 </section>
@@ -404,28 +549,22 @@
 <!-- ── Render pipeline ── -->
 <section class="section">
   <div class="wrap">
-    <div class="eyebrow">Platform support</div>
-    <h2 class="section-title">Render pipeline compatibility</h2>
-    <p class="section-sub">MetaQuestGuard is 100% C# IL code. Compiles on all Unity backends.</p>
+    <div class="eyebrow">Package compatibility</div>
+    <h2 class="section-title">Built for Unity VR projects.</h2>
+    <p class="section-sub">The package is designed around Quest / Android VR and server-authoritative multiplayer validation, without depending on Meta Platform Attestation.</p>
 
     <div class="render-compat">
-      <div class="compat-cell">
-        <strong>Built-in Render Pipeline</strong>
-        <span style="color: var(--green);">✓ Compatible</span>
-      </div>
-      <div class="compat-cell">
-        <strong>Universal Render Pipeline</strong>
-        <span style="color: var(--green);">✓ Compatible</span>
-      </div>
-      <div class="compat-cell">
-        <strong>High Definition Render Pipeline</strong>
-        <span style="color: var(--green);">✓ Compatible</span>
-      </div>
+      <div class="compat-cell"><strong>Meta Quest / Android VR</strong><span style="color:var(--green);">✓ Primary target</span></div>
+      <div class="compat-cell"><strong>Mirror Networking</strong><span style="color:var(--green);">✓ Bridge included</span></div>
+      <div class="compat-cell"><strong>Photon PUN</strong><span style="color:var(--green);">✓ Helpers included</span></div>
+      <div class="compat-cell"><strong>PlayFab</strong><span style="color:var(--green);">✓ CloudScript support</span></div>
     </div>
 
-    <div style="padding: 16px 20px; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); font-size: 13px; color: var(--ink-2);">
-      <strong style="color: var(--ink); display: block; margin-bottom: 6px;">Minimum Unity version</strong>
-      2021.3 LTS or later. Uses System.Security.Cryptography, System.Collections.Concurrent, and UnityEngine.Networking — all built in. The Mirror bridge is optional and only compiles when your project defines <code>MIRROR</code>.
+    <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);">
+      <strong style="color:var(--ink);display:block;margin-bottom:6px;">No Meta Platform Attestation</strong>
+      This edition uses your own authentication/session model instead. You can run anonymously,
+      or provide a <code>StudioSession</code> containing your session ID, optional HMAC key,
+      player identifier, expiry, build version, and integrity baseline.
     </div>
   </div>
 </section>
@@ -433,75 +572,23 @@
 <!-- ── Features ── -->
 <section class="section" id="features">
   <div class="wrap">
-    <div class="eyebrow">Design principles</div>
-    <h2 class="section-title">Standalone, attestation-native.</h2>
-    <p class="section-sub">MetaQuestGuard is built directly on Meta's platform primitives. No third-party anti-cheat cloud. No invasive client inspection.</p>
+    <div class="eyebrow">What you are licensing</div>
+    <h2 class="section-title">A practical, layered anti-cheat stack.</h2>
+    <p class="section-sub">The package raises the cost of client-side cheating while putting important gameplay decisions on the authoritative server.</p>
 
     <div class="features-grid">
-      <div class="feature-card">
-        <h3>Highly effective</h3>
-        <p>Built after analyzing real world cheats. Detects Unity-specific tools like MelonLoader, BepInEx, and other common threats — not a generic signature list.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Zero risk</h3>
-        <p>Read-only, user-mode, and runs in a worker thread — no performance hit, no impact on honest players. Never blocks, patches, or touches another process.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Unity tailored</h3>
-        <p>Runs Unity-specific checks and bakes directly into your IL2CPP assembly — no obvious AntiCheat.dll file, fully embedded.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Netcode agnostic</h3>
-        <p>Works with any multiplayer Unity game. A Mirror Networking integration ships today, with more transports on the roadmap.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Privacy focused</h3>
-        <p>No cloud, no tracking. Only scans the game process &amp; folder. Sends signed reports to your own game server — never a third party.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Silent reporting</h3>
-        <p>Guard never blocks — only sends reports quietly to the server. Cheaters stay unaware and assume they were caught by other players.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Cross-platform C#</h3>
-        <p>100% C# IL code. Compiles on all Unity platforms. Detects cheats on Windows and Meta Quest, with zero Quest-incompatible PC-only checks in the Quest build.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Easy to use</h3>
-        <p>A single component. Every cheat is reported through one event: <code>OnDetected(confidence, type, evidence)</code>.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Attestation-native trust</h3>
-        <p>Meta Attestation tokens are cached for their full validity window — never a heartbeat. Advanced device integrity passes; Basic is gated unless you opt in.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Security patch gating</h3>
-        <p>Sessions report the device's OS security patch date. Anything older than 30 days is treated as needing an update, the same way a failed attestation is.</p>
-      </div>
-      <div class="feature-card">
-        <h3>GorillaLocomotion-aware (v2)</h3>
-        <p>Dedicated validator for hand-over-hand momentum climbing. Now includes surface-contact checks, post-release velocity continuity, height-gain limits, rubber-band detection, statistical baselines, history buffer, and physics prediction.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Obfuscated release build</h3>
-        <p>Ship the obfuscated DLL (ConfuserEx / Obfuscar / commercial IL obfuscator + string encryption). Source stays internal. Guard self-integrity hashes critical method bodies against a baseline signed into the play token.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Guard anti-tamper</h3>
-        <p>Integrity self-check of Guard assemblies, signed worker-thread alive pings the server can expect, and protection against suspension of the background scanner.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Stronger injection detection</h3>
-        <p>Beyond name lists: HarmonyMethod / PatchProcessor type graphs, /proc/self/maps path checks for libunity/libil2cpp, and System.Reflection.Emit dynamic codegen signals.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Anti-false-positive toolkit</h3>
-        <p>Per-detection confidence thresholds, temporary suppression windows after legitimate high-intensity actions, kinematic history for server re-validation, and coalesced detection-storm reports.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Photon opt-in helpers</h3>
-        <p>AntiRPCSpam (rate-limits event 200/202) and AntiMasterClientSwitch ship as optional components. Guard core stays silent; these scripts are the explicit enforcement surface.</p>
-      </div>
+      <div class="feature-card"><h3>Runtime integrity scans</h3><p>Detects common mod loaders, injected libraries, instruction patching, debuggers, virtualized devices, multiple clients, and dynamic code generation.</p></div>
+      <div class="feature-card"><h3>FridaShield</h3><p>Native multi-vector instrumentation checks cover ports, memory maps, threads, RWX regions, Unix sockets, ELF hashes, TracerPid, and memory tracing signals.</p></div>
+      <div class="feature-card"><h3>Native library baseline</h3><p>Generate an encrypted Android native-library baseline in the Unity Editor and re-check libraries at runtime for tampering.</p></div>
+      <div class="feature-card"><h3>GorillaLocomotion-aware</h3><p>Server-side validation covers arm span, grip speed, release speed, momentum decay, sustained flight, grab geometry, rubber-band teleports, and long-arm behaviour.</p></div>
+      <div class="feature-card"><h3>Generic VR validation</h3><p>Validate head and hand movement, sequence monotonicity, clock skew, command rate, and other input constraints on the authoritative server.</p></div>
+      <div class="feature-card"><h3>PlayFab enforcement</h3><p>Optional PlayFab CloudScript integration can send high-confidence detections to Discord and apply configurable bans when a PlayFabId is available.</p></div>
+      <div class="feature-card"><h3>Photon helpers</h3><p>Includes AntiSpamRpc for RPC/instantiation rate limiting and AntiMasterClientSwitch for unauthorized Photon Master Client changes.</p></div>
+      <div class="feature-card"><h3>Mirror bridge</h3><p>A thin Mirror bridge forwards validated GorillaLocomotion frames to the server-side movement validator and exposes detections to moderation hooks.</p></div>
+      <div class="feature-card"><h3>Signed reporting</h3><p>Reports can be HMAC-signed when you provide a studio key. Without a key, the package can still report unsigned detection data.</p></div>
+      <div class="feature-card"><h3>Silent detection</h3><p>Detection is designed around reporting and server enforcement rather than automatically quitting or quarantining the player for every signal.</p></div>
+      <div class="feature-card"><h3>Anti-false-positive thresholds</h3><p>Detection thresholds are configurable per signal, with separate confidence values for movement anomalies and integrity detections.</p></div>
+      <div class="feature-card"><h3>Commercial package</h3><p><strong>PAID PRODUCT.</strong> This is a commercial anti-cheat package, not a free/open-source anti-cheat. Licensing and purchase access should be requested through your sales/download flow.</p></div>
     </div>
   </div>
 </section>
@@ -509,72 +596,32 @@
 <!-- ── Detections ── -->
 <section class="section" id="detections">
   <div class="wrap">
-    <div class="eyebrow">What Guard currently detects</div>
-    <h2 class="section-title">Runtime threat detection.</h2>
-    <p class="section-sub">A background worker thread runs read-only sweeps at a configurable interval. Every hit reports through <code>OnDetected(confidence, type, evidence)</code>.</p>
+    <div class="eyebrow">Runtime detection</div>
+    <h2 class="section-title">Integrity signals without Attestation.</h2>
+    <p class="section-sub">A worker thread performs configurable read-only sweeps. Detection reports expose confidence, type, evidence, session/build identifiers, and optional history.</p>
 
-    <div style="margin-top: 48px;">
+    <div style="margin-top:48px;">
       <table>
-        <thead>
-          <tr>
-            <th>Detection</th>
-            <th>Method</th>
-            <th>Confidence</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Detection</th><th>What the package checks</th><th>Default threshold</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Mod loaders</strong> (MelonLoader, BepInEx, HarmonyX)</td>
-            <td>Assembly signatures + aggressive HarmonyMethod / PatchProcessor type-graph scan</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>DLL / library injection</strong></td>
-            <td>/proc/self/maps scan for Frida/Substrate/Xposed + unusual libunity/libil2cpp mapping paths</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Dynamic code generation</strong></td>
-            <td>Reflection.Emit / DynamicMethod presence in non-system assemblies</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Guard self-integrity</strong></td>
-            <td>SHA-256 of critical Guard method IL bodies vs baseline signed into play token</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Worker alive miss</strong></td>
-            <td>Signed periodic pings from worker thread; server detects suspension/termination</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Instruction patching</strong></td>
-            <td>Hash-checked function prologues for registered critical native pointers; flags inline hooks</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Debuggers</strong></td>
-            <td><code>Debugger.IsAttached</code> + Android <code>Debug.isDebuggerConnected</code></td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Virtual machines / emulators</strong></td>
-            <td>Build fingerprint / hardware signal check (soft signal — Attestation device integrity is authoritative)</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Multiple clients</strong></td>
-            <td>Named single-instance mutex check</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
+          <tr><td><strong>Mod loaders</strong></td><td>Known MelonLoader, BepInEx, Harmony, Il2CppInterop, QuestPatcher and related signatures</td><td><span class="tag tag-high">0.90</span></td></tr>
+          <tr><td><strong>Library injection</strong></td><td>Known injection/instrumentation artifacts and loaded-library signals</td><td><span class="tag tag-high">0.90</span></td></tr>
+          <tr><td><strong>Instruction patching</strong></td><td>Integrity checks around registered critical native function pointers / inline-hook indicators</td><td><span class="tag tag-high">0.95</span></td></tr>
+          <tr><td><strong>Frida instrumentation</strong></td><td>FridaShield native multi-vector instrumentation checks</td><td><span class="tag tag-med">0.60</span></td></tr>
+          <tr><td><strong>Native library tamper</strong></td><td>Encrypted native-library baseline comparison on Android</td><td><span class="tag tag-high">0.92</span></td></tr>
+          <tr><td><strong>Guard integrity</strong></td><td>Self-integrity hash verification</td><td><span class="tag tag-high">0.99</span></td></tr>
+          <tr><td><strong>Debuggers</strong></td><td>Debugger attachment signals</td><td><span class="tag tag-med">Configurable</span></td></tr>
+          <tr><td><strong>Virtualized device</strong></td><td>Device / build signals used as a soft integrity indicator</td><td><span class="tag tag-med">Configurable</span></td></tr>
+          <tr><td><strong>Multiple clients</strong></td><td>Named single-instance mutex check</td><td><span class="tag tag-med">Configurable</span></td></tr>
+          <tr><td><strong>Dynamic code generation</strong></td><td>Runtime signal for suspicious dynamic-code behaviour</td><td><span class="tag tag-med">Configurable</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <div style="padding: 16px 20px; margin-top: 24px; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); font-size: 13px; color: var(--ink-2);">
-      <strong style="color: var(--ink); display: block; margin-bottom: 6px;">Roadmap</strong>
-      Mobile / Mac / WebGL cheat detection and IL weaving are planned next. Dogfooded on a live title and actively shaped by the needs of large studios.
+    <div style="padding:16px 20px;margin-top:24px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);">
+      <strong style="color:var(--ink);display:block;margin-bottom:6px;">Important limitation</strong>
+      Without Meta Attestation, there is no platform-level proof that the binary is genuine or that the device is untampered.
+      Client-side signals should therefore be combined with authoritative server validation.
     </div>
   </div>
 </section>
@@ -582,90 +629,24 @@
 <!-- ── Server validation ── -->
 <section class="section">
   <div class="wrap">
-    <div class="eyebrow">What your server validates</div>
-    <h2 class="section-title">Server-side movement checks.</h2>
-    <p class="section-sub">Guard ships two validators: a generic VR kinematics envelope, and a dedicated one for GorillaLocomotion-style hand-over-hand climbing.</p>
+    <div class="eyebrow">Authoritative server validation</div>
+    <h2 class="section-title">Put the important checks on the server.</h2>
+    <p class="section-sub">The package includes generic VR input validation plus a dedicated GorillaLocomotion validator for multiplayer games.</p>
 
-    <div style="margin-top: 48px;">
+    <div style="margin-top:48px;">
       <table>
-        <thead>
-          <tr>
-            <th>Validation type</th>
-            <th>Implementation</th>
-            <th>Cost of bypass</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Validation</th><th>Implementation</th><th>Strength</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Session validity</strong></td>
-            <td>Attestation token freshness, expiration, signature</td>
-            <td><span class="tag tag-high">Very high</span></td>
-          </tr>
-          <tr>
-            <td><strong>Sequence monotonicity</strong></td>
-            <td>Per-player command sequencing; replay detection</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Generic head/hand kinematics</strong></td>
-            <td>Max speed envelopes (head 20 m/s, hands 25 m/s), time delta validation</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>GorillaLocomotion arm span, long-arm &amp; grip speed</strong></td>
-            <td>Reach cap from head; long-arm exploit threshold; hand speed while gripped + per-player statistical outliers</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>GorillaLocomotion release &amp; momentum decay</strong></td>
-            <td>Caps release speed; post-release velocity must decay on the expected drag curve; flags mid-air acceleration</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Sustained flight &amp; height gain</strong></td>
-            <td>Airborne time without grip/ground + max height gain relative to last surface contact</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Rubber-band / teleport deltas</strong></td>
-            <td>Large position jumps over tiny dt that still pass average-speed envelope; history-buffer spike detection</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Physics prediction deviation</strong></td>
-            <td>Expected next position from last velocity + drag; large errors flagged</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Grab-onto-geometry / hand–surface contact</strong></td>
-            <td>Optional callback validates a fresh grip lands near real climbable geometry, not thin air</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Impossible joint configs</strong></td>
-            <td>Head–hand relative positions and extreme hand separation at long reach</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Photon RPC / Instantiation spam</strong></td>
-            <td>Opt-in AntiSpamRpc rate-limits event codes 200 and 202; reports via Guard</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Unauthorized Master Client switch</strong></td>
-            <td>Opt-in AntiMasterClientSwitch reverts and reports illicit Master Client seizures</td>
-            <td><span class="tag tag-high">High</span></td>
-          </tr>
-          <tr>
-            <td><strong>Rate limiting</strong></td>
-            <td>Commands per second capped; flood detection</td>
-            <td><span class="tag tag-med">Medium</span></td>
-          </tr>
-          <tr>
-            <td><strong>Clock synchronization</strong></td>
-            <td>Client timestamp sanity check (±3s skew tolerance)</td>
-            <td><span class="tag tag-low">Low</span></td>
-          </tr>
+          <tr><td><strong>Sequence monotonicity</strong></td><td>Per-player command sequencing and replay detection</td><td><span class="tag tag-high">High</span></td></tr>
+          <tr><td><strong>Head / hand kinematics</strong></td><td>Default max head speed 20 m/s and hand speed 25 m/s with time-delta checks</td><td><span class="tag tag-med">Medium</span></td></tr>
+          <tr><td><strong>Arm span &amp; grip speed</strong></td><td>Reach cap from the head and grip-speed limits while actively gripped</td><td><span class="tag tag-med">Medium</span></td></tr>
+          <tr><td><strong>Release &amp; momentum</strong></td><td>Caps release speed and validates expected post-release momentum decay</td><td><span class="tag tag-high">High</span></td></tr>
+          <tr><td><strong>Sustained flight</strong></td><td>Detects airborne movement without grip or ground contact beyond the expected arc</td><td><span class="tag tag-high">High</span></td></tr>
+          <tr><td><strong>Grab geometry</strong></td><td>Optional callback checks whether a new grip is near valid climbable geometry</td><td><span class="tag tag-med">Medium</span></td></tr>
+          <tr><td><strong>Rubber-band teleport</strong></td><td>Short-delta position spike detection</td><td><span class="tag tag-high">High</span></td></tr>
+          <tr><td><strong>Long-arm exploit</strong></td><td>Reach / joint configuration checks for abnormal extension</td><td><span class="tag tag-high">High</span></td></tr>
+          <tr><td><strong>Rate limiting</strong></td><td>Commands-per-second cap and flood detection</td><td><span class="tag tag-med">Medium</span></td></tr>
+          <tr><td><strong>Clock synchronization</strong></td><td>Client timestamp sanity check with configurable skew tolerance</td><td><span class="tag tag-low">Low</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -675,45 +656,19 @@
 <!-- ── Architecture ── -->
 <section class="section" id="architecture">
   <div class="wrap">
-    <div class="eyebrow">Recommended topology</div>
-    <h2 class="section-title">Split-trust architecture.</h2>
-    <p class="section-sub">Meta validates identity and device. Your backend mints a short-lived session. Authoritative server owns gameplay.</p>
+    <div class="eyebrow">Deployment model</div>
+    <h2 class="section-title">Client signals. Your backend. Your rules.</h2>
+    <p class="section-sub">Meta Attestation is intentionally not part of this edition. Your existing authentication and server stack supplies the session and enforcement layer.</p>
 
-    <div style="margin-top: 48px;">
+    <div style="margin-top:48px;">
       <table>
-        <thead>
-          <tr>
-            <th>Game profile</th>
-            <th>Trust model</th>
-            <th>Ceiling</th>
-            <th>Best for</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Setup</th><th>How it works</th><th>Best fit</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Casual co-op / social VR</strong></td>
-            <td>Meta attestation + server economy only</td>
-            <td><span class="tag tag-med">Medium</span></td>
-            <td>Low-stakes multiplayer, play-for-fun</td>
-          </tr>
-          <tr>
-            <td><strong>Competitive shooter / ranked PvP</strong></td>
-            <td>Attestation + authoritative game server</td>
-            <td><span class="tag tag-high">High</span></td>
-            <td>E-sports-style VR, ranked progression</td>
-          </tr>
-          <tr>
-            <td><strong>Deterministic strategy / tactics</strong></td>
-            <td>Attestation + server result validation</td>
-            <td><span class="tag tag-high">High</span></td>
-            <td>Turn-based or low-latency action games</td>
-          </tr>
-          <tr>
-            <td><strong>Monetized titles</strong></td>
-            <td>Attestation + server-authoritative economy ledger</td>
-            <td><span class="tag tag-high">Very high</span></td>
-            <td>Any game with real money or battle pass</td>
-          </tr>
+          <tr><td><strong>Anonymous</strong></td><td>Guard starts scanning automatically; reports can be unsigned</td><td>Projects that already identify players elsewhere</td></tr>
+          <tr><td><strong>StudioSession</strong></td><td>Supply SessionId, optional HMAC key, player UniqueId, expiry, build version, and baseline</td><td>Games with their own authentication/session service</td></tr>
+          <tr><td><strong>PlayFab</strong></td><td>Use PlayFab CloudScript to receive high-value detections and optionally ban players</td><td>PlayFab-backed multiplayer titles</td></tr>
+          <tr><td><strong>Photon</strong></td><td>Use the supplied anti-spam and Master Client protection helpers</td><td>Photon PUN multiplayer</td></tr>
+          <tr><td><strong>Mirror</strong></td><td>Use the included bridge to submit movement frames for server validation</td><td>Mirror networking projects</td></tr>
         </tbody>
       </table>
     </div>
@@ -724,71 +679,36 @@
 <section class="section" id="quickstart">
   <div class="wrap">
     <div class="eyebrow">Integration guide</div>
-    <h2 class="section-title">Three-step bootstrap.</h2>
-    <p class="section-sub">Add the component, run attestation, subscribe to detections. Your server gates the response.</p>
+    <h2 class="section-title">Start protecting your game in three steps.</h2>
+    <p class="section-sub">No Meta Attestation bootstrap is required. Choose anonymous scanning or connect the Guard to your own session/authentication system.</p>
 
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;">
       <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);">
         <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;flex-shrink:0;">1</div>
-        <div>
-          <div style="font-size:14px;font-weight:500;margin-bottom:4px;">Attach the component</div>
-          <div style="font-size:13px;color:var(--ink-2);">Drop <code>MetaQuestGuard.cs</code> into your project. Add the <code>MetaQuestGuard</code> component to a persistent root <code>GameObject</code>. Set your backend report endpoint, security-patch threshold, and device-integrity policy in the Inspector.</div>
-        </div>
+        <div><div style="font-size:14px;font-weight:500;margin-bottom:4px;">Add MetaQuestGuard</div><div style="font-size:13px;color:var(--ink-2);">Place <code>MetaQuestGuard</code> in your scene. With <code>allowHighValueWithoutSession</code> enabled, runtime scanning starts automatically.</div></div>
       </div>
       <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);">
         <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;flex-shrink:0;">2</div>
-        <div>
-          <div style="font-size:14px;font-weight:500;margin-bottom:4px;">Bootstrap after Meta SDK init</div>
-          <div style="font-size:13px;color:var(--ink-2);">Call <code>MetaQuestGuardBootstrap.Run()</code> once with the user proof, attestation token, and backend URL. Guard caches the returned session — no heartbeat is ever generated, and the worker thread starts automatically once bootstrap succeeds.</div>
-        </div>
+        <div><div style="font-size:14px;font-weight:500;margin-bottom:4px;">Connect your session or PlayFab</div><div style="font-size:13px;color:var(--ink-2);">Optionally call <code>SetStudioSession()</code> with your own session data, or use the PlayFab CloudScript backend. HMAC signing is optional.</div></div>
       </div>
       <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);">
         <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;flex-shrink:0;">3</div>
-        <div>
-          <div style="font-size:14px;font-weight:500;margin-bottom:4px;">Server-side validation loop</div>
-          <div style="font-size:13px;color:var(--ink-2);">On your authoritative game server, use <code>MetaQuestGuard.ValidateInputCommand()</code> for generic VR input, or <code>GorillaLocomotionGuard.ValidateFrame()</code> if your movement is hand-over-hand climbing. Gate ranked play behind <code>IsAllowedHighValueAction()</code>. Runtime detections forward automatically via <code>OnDetected</code>.</div>
-        </div>
-      </div>
-      <div style="display:flex;gap:20px;align-items:flex-start;padding:20px 24px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;flex-shrink:0;">4</div>
-        <div>
-          <div style="font-size:14px;font-weight:500;margin-bottom:4px;">Optional: wire your netcode</div>
-          <div style="font-size:13px;color:var(--ink-2);">Add <code>MetaQuestGuardMirrorIntegration.cs</code> (guarded by the <code>MIRROR</code> define) if you're on Mirror Networking. Other transports follow the same one-file bridge pattern.</div>
-        </div>
+        <div><div style="font-size:14px;font-weight:500;margin-bottom:4px;">Validate gameplay on the server</div><div style="font-size:13px;color:var(--ink-2);">Use <code>ValidateInputCommand()</code> for generic VR input or <code>GorillaLocomotionGuard.ValidateFrame()</code> for GorillaLocomotion-style movement. Forward detections through <code>OnDetected</code>.</div></div>
       </div>
     </div>
 
     <div class="code-wrap">
-      <div class="code-bar">
-        <div class="code-dots">
-          <div class="code-dot" style="background:#ff5f56"></div>
-          <div class="code-dot" style="background:#ffbd2e"></div>
-          <div class="code-dot" style="background:#27c93f"></div>
-        </div>
-        <span class="code-filename">GameManager.cs</span>
-        <span></span>
-      </div>
+      <div class="code-bar"><div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div><span class="code-filename">StudioSession.cs</span><span></span></div>
       <div class="code-body">
-<span class="cm">// Subscribe to detections (silently, server-side only)</span>
-_guard.OnDetected += (confidence, type, evidence) =&gt; {
-&nbsp;&nbsp;ModerationPipeline.<span class="cm2">Log</span>(confidence, type, evidence);
+<span class="cm">// No Meta Attestation required</span><br>
+<span class="ck">var</span> session = <span class="ck">new</span> MetaQuestGuard.StudioSession {<br>
+&nbsp;&nbsp;SessionId = myMatchToken,<br>
+&nbsp;&nbsp;UniqueId = myPlayerId,<br>
+&nbsp;&nbsp;HmacKey = myOptionalHmacKey,<br>
+&nbsp;&nbsp;TokenExpiresAtUtc = DateTime.UtcNow.AddHours(4)<br>
 };<br><br>
-<span class="cm">// After Meta SDK initializes — runs once, no heartbeat</span>
-<span class="ck">yield return</span> <span class="cm2">StartCoroutine</span>(MetaQuestGuardBootstrap.<span class="cm2">Run</span>(
-&nbsp;&nbsp;_guard,
-&nbsp;&nbsp;backendUrl:      <span class="cs">"https://your-server.example.com/bootstrap"</span>,
-&nbsp;&nbsp;metaUserId:      user.Id,
-&nbsp;&nbsp;userProofNonce:  userProofNonce,
-&nbsp;&nbsp;attestationToken: attestationToken,
-&nbsp;&nbsp;onComplete:      (ok, sessionId) =&gt; { <span class="ck">if</span> (!ok) ShowUpdateOrErrorPrompt(); }
-));<br><br>
-<span class="cm">// Gate ranked play — Advanced integrity + current security patch required</span>
-<span class="ck">if</span> (_guard.<span class="cm2">IsAllowedHighValueAction</span>(<span class="ck">out</span> <span class="cv">var</span> denyReason))
-&nbsp;&nbsp;<span class="cm2">JoinRankedQueue</span>();<br><br>
-<span class="cm">// Server: validate a GorillaLocomotion-style climb/fling frame</span>
-<span class="cv">var</span> result = _locomotionGuard.<span class="cm2">ValidateFrame</span>(playerId, frameSample);
-<span class="ck">if</span> (!result.IsAccepted)
-&nbsp;&nbsp;<span class="cm2">RejectAndLog</span>(result.Reason);
+MetaQuestGuard.Instance.<span class="cm2">SetStudioSession</span>(session);<br><br>
+<span class="cm">// Or simply allow anonymous scanning and keep enforcement server-side.</span>
       </div>
     </div>
   </div>
@@ -799,49 +719,36 @@ _guard.OnDetected += (confidence, type, evidence) =&gt; {
   <div class="wrap">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;align-items:start;">
       <div>
-        <div class="eyebrow">Compliance</div>
-        <h2 class="section-title" style="font-size:clamp(20px,2.5vw,26px);">Built for Meta review.</h2>
-        <p style="font-size:14px;color:var(--ink-2);line-height:1.7;margin-top:0;">Guard avoids invasive client inspection that conflicts with Meta platform policy and GDPR/CCPA constraints. Motion data is treated as potentially identifying. Raw traces stay behind high-friction access controls, never third-party.</p>
+        <div class="eyebrow">Operational model</div>
+        <h2 class="section-title" style="font-size:clamp(20px,2.5vw,26px);">Designed around your backend.</h2>
+        <p style="font-size:14px;color:var(--ink-2);line-height:1.7;margin-top:0;">
+          This package does not provide platform-level device attestation. It gives you client-side integrity signals
+          and server-side validation primitives so your own backend can decide what to trust and what action to take.
+        </p>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
-        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;">
-          <strong style="color:var(--ink);display:block;margin-bottom:4px;">No kernel hooks</strong>
-          User-mode only. Zero rootkit-like behavior. Compliant with Meta's app integrity scan.
-        </div>
-        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;">
-          <strong style="color:var(--ink);display:block;margin-bottom:4px;">No third-party cloud</strong>
-          Reports to your backend only via HMAC-signed HTTPS. Guard has zero telemetry endpoints.
-        </div>
-        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;">
-          <strong style="color:var(--ink);display:block;margin-bottom:4px;">Rotation-aware IDs</strong>
-          Meta's Attestation <code>unique_id</code> rotates every 30 days by design. No indefinite fingerprinting.
-        </div>
-        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;">
-          <strong style="color:var(--ink);display:block;margin-bottom:4px;">Device integrity gating</strong>
-          Advanced device integrity allows all actions. Basic restricted unless explicitly configured. Respects Meta's security model.
-        </div>
-        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;">
-          <strong style="color:var(--ink);display:block;margin-bottom:4px;">Security patch freshness</strong>
-          Sessions on a device security patch older than 30 days (configurable) are treated as needing an update and gated like a failed attestation.
-        </div>
+        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;"><strong style="color:var(--ink);display:block;margin-bottom:4px;">No Meta Attestation dependency</strong>Works with your existing authentication/session stack.</div>
+        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;"><strong style="color:var(--ink);display:block;margin-bottom:4px;">Optional HMAC reports</strong>Supply a studio HMAC key when you want signed detection reports.</div>
+        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;"><strong style="color:var(--ink);display:block;margin-bottom:4px;">PlayFab enforcement</strong>High-confidence detections can feed CloudScript for Discord alerts and configurable bans.</div>
+        <div style="padding:16px 20px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;color:var(--ink-2);line-height:1.6;"><strong style="color:var(--ink);display:block;margin-bottom:4px;">Paid commercial package</strong>License required. Pricing is not specified in the supplied package, so the site intentionally does not invent a price.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── CTA ── -->
-<section style="padding:80px 0;background:var(--ink);border-top:1px solid rgba(255,255,255,.06);">
+<section id="download" style="padding:80px 0;background:var(--ink);border-top:1px solid rgba(255,255,255,.06);">
   <div class="wrap" style="text-align:center;">
-    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:16px;text-transform:uppercase;">Worker-thread detection · Meta Attestation · Silent reporting</div>
-    <h2 style="font-family:var(--display);font-size:clamp(28px,4vw,44px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px;">Ship anti-cheat, not assumptions.</h2>
-    <p style="font-size:16px;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto 36px;line-height:1.65;">Attestation-native. Server-authoritative. Compliant with Meta platform policy. Cheaters stay unaware.</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.06);font-family:var(--mono);font-size:10px;letter-spacing:.10em;color:#9ebeff;text-transform:uppercase;margin-bottom:18px;">PAID COMMERCIAL LICENSE</div>
+    <h2 style="font-family:var(--display);font-size:clamp(28px,4vw,44px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px;">Protect your VR game with Guard.</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,.58);max-width:520px;margin:0 auto 36px;line-height:1.65;">
+      A no-attestation anti-cheat package for Quest and Android VR. Purchase a license to use the package in your project.
+    </p>
     <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
-      <a href="#download" class="btn" style="background:#fff;color:var(--ink);">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download MetaQuestGuard
-      </a>
-      <a href="#quickstart" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.15);">Get started</a>
+      <a href="#quickstart" class="btn" style="background:#fff;color:var(--ink);">View integration</a>
+      <a href="#features" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.15);">See what is included</a>
     </div>
+    <div style="margin-top:22px;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.35);">PRICING / PURCHASE DETAILS SHOULD BE ADDED TO YOUR SALES OR LICENSE LINK</div>
   </div>
 </section>
 
@@ -851,12 +758,12 @@ _guard.OnDetected += (confidence, type, evidence) =&gt; {
     <div class="footer-inner">
       <div class="footer-left">
         <div class="footer-logo">MetaQuestGuard</div>
-        <div class="footer-note">100% C# · attestation-native · no third-party cloud · GorillaLocomotion-aware · Photon helpers · anti-FP toolkit</div>
+        <div class="footer-note">Paid commercial package · no Meta Attestation dependency · Quest / Android VR · GorillaLocomotion-aware</div>
       </div>
       <div class="footer-links">
         <a href="#features">Features</a>
-        <a href="#detections">Validation</a>
-        <a href="#architecture">Architecture</a>
+        <a href="#detections">Server validation</a>
+        <a href="#architecture">How it works</a>
         <a href="#quickstart">Quick start</a>
       </div>
     </div>
@@ -865,3 +772,4 @@ _guard.OnDetected += (confidence, type, evidence) =&gt; {
 
 </body>
 </html>
+
